@@ -11,7 +11,7 @@ import GameStatus from '../../components/GameStatus';
 import GameResult from '../../components/GameResult';
 import useQuizStorage from '../../hooks/useQuizStorage';
 
-export default function PlayQuiz() {
+export default function PlayQuizes() {
   const { quizId } = useParams<{ quizId: string }>();
   const { quizzes, saveQuizProgress } = useQuizStorage();
   const router = useRouter();
@@ -28,8 +28,6 @@ export default function PlayQuiz() {
     currentQuiz && Math.round((correct / currentQuiz.questions.length) * 100);
   const question = currentQuiz?.questions[step];
   const currentQuizQuestLength = currentQuiz?.questions.length;
-
-  console.log(step === currentQuizQuestLength);
 
   useEffect(() => {
     if (currentQuiz) {

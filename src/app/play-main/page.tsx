@@ -10,19 +10,11 @@ import { Quiz } from '../../types';
 import useQuizStorage from '../../hooks/useQuizStorage';
 
 export default function PlayMain() {
-  const { quizzes, saveQuizProgress } = useQuizStorage();
+  const { quizzes, removeQuiz } = useQuizStorage();
 
   const deleteTheProgress = (quizId: number) => {
-    const currentQuiz = quizzes.find((item: Quiz) => item.id === Number(quizId));
     if (window.confirm('Are you sure you want to delete all progress?')) {
-      if (currentQuiz) {
-        const updatedQuiz = {
-          ...currentQuiz,
-          currentStep: 0,
-          correctAnswers: 0,
-        };
-        saveQuizProgress(updatedQuiz);
-      }
+      removeQuiz(quizId);
     }
   };
 
@@ -85,10 +77,11 @@ export default function PlayMain() {
                 <Typography variant="h3">
                   No quizzes available. Create one to start playing!
                 </Typography>
-                <Link href="/create-quiz"></Link>
-                <Button variant="text" color="primary">
-                  Create Quiz
-                </Button>
+                <Link href="/create-quiz">
+                  <Button variant="text" color="primary">
+                    Create Quiz
+                  </Button>
+                </Link>
               </Box>
             )}
           </List>

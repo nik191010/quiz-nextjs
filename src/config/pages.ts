@@ -5,7 +5,7 @@ interface Pages {
 
 const pages: Pages[] = [
   { name: 'Home', link: '/' },
-  { name: 'Create Quiz', link: '/create' },
+  { name: 'Create Quiz', link: '/create-quiz' },
   { name: 'Play Quiz', link: '/play-main' },
 ];
 
