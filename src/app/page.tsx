@@ -1,95 +1,76 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { Box, Button, Container, List, ListItem, Typography } from '@mui/material';
+
+import theme from '../theme';
+import { Quiz } from '../types';
+import useQuizStorage from '../hooks/useQuizStorage';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const { quizzes, removeQuiz } = useQuizStorage();
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  return (
+    <Container sx={{ textAlign: 'center' }} maxWidth="md">
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5rem 0' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+          <Typography variant="h1">Test Your Knowledge with Quizzes</Typography>
+          <Typography variant="body1">
+            You're just looking for a playful way to learn new facts, our quizzes are designed to
+            entertain and educate.
+          </Typography>
+          <Link href="/create-quiz">
+            <Button variant="text" color="primary">
+              Create Quiz
+            </Button>
+          </Link>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <Typography variant="h2">List of Quizzes</Typography>
+
+          <List>
+            {quizzes.map((quiz: Quiz) => (
+              <ListItem
+                sx={{ padding: 0, display: 'flex', alignItems: 'flex-start', gap: '.5rem' }}
+                key={quiz.id}
+              >
+                <Link href={`/create-quiz/${quiz.id}`}>
+                  <Box>
+                    {quiz.title.charAt(0).toUpperCase() + quiz.title.toLowerCase().slice(1)}
+                  </Box>
+                  <Box>{quiz.draft && '- Draft'}</Box>
+                </Link>
+                <Button
+                  onClick={() => removeQuiz(quiz.id)}
+                  sx={{
+                    all: 'initial',
+                    fontFamily: 'Arial, sans-serif',
+                    fontSize: '.7rem',
+                    color: theme.palette.primary.main,
+                    cursor: 'pointer',
+                    padding: '.1rem',
+                    transition: 'all ease-in 0.5s',
+                    '&:hover': {
+                      color: '#000',
+                    },
+                  }}
+                >
+                  X
+                </Button>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Box>
+    </Container>
   );
 }
