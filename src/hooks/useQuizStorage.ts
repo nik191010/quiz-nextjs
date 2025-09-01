@@ -5,6 +5,7 @@ import { useSnackBar } from './SnackBarContext';
 import { useRouter } from 'next/navigation';
 
 const getStoredQuizzes = (): Array<Quiz> => {
+  if (typeof window === 'undefined') return [];
   const storedQuizzes = localStorage.getItem('quizzes');
   return storedQuizzes ? JSON.parse(storedQuizzes) : [];
 };

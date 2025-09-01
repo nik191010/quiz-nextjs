@@ -1,7 +1,7 @@
 import { boxQuestion, fullWidth } from './styles';
 import { Box, Button, FormControl, TextField } from '@mui/material';
 import AnswerInputRow from '../[quizId]/AnswerInputRow';
-import React, { FC } from 'react';
+import React from 'react';
 import { Question } from '../../../types';
 import { useQuizFormContext } from './QuizFormContext';
 

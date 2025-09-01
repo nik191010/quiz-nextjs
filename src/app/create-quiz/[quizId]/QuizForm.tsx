@@ -39,6 +39,7 @@ export default function QuizForm({ quizId }: QuizFormProps) {
 
         <FormControl sx={formControl}>
           <TextField
+            id="quiz-title"
             label="Title"
             value={title}
             onChange={handleTitleChange}

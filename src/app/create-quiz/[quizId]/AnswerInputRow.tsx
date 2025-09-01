@@ -8,7 +8,7 @@ import {
   FormGroup,
   TextField,
 } from '@mui/material';
-import React, { FC } from 'react';
+import React from 'react';
 import { Answer, Question } from '../../../types';
 import { useQuizFormContext } from './QuizFormContext';
 

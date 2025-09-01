@@ -17,8 +17,8 @@ export default function Home() {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
           <Typography variant="h1">Test Your Knowledge with Quizzes</Typography>
           <Typography variant="body1">
-            You're just looking for a playful way to learn new facts, our quizzes are designed to
-            entertain and educate.
+            You&apos;re just looking for a playful way to learn new facts, our quizzes are designed
+            to entertain and educate.
           </Typography>
           <Link href="/create-quiz">
             <Button variant="text" color="primary">

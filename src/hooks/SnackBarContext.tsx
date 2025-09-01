@@ -35,7 +35,11 @@ export const SnackBarProvider: FC<{ children: React.ReactNode }> = ({ children }
         autoHideDuration={message?.autoHideDuration}
         onClose={(_, reason) => reason !== 'clickaway' && handleClose()}
       >
-        <Alert severity={message?.severity} onClose={handleClose}>
+        <Alert
+          data-testid="quiz-success-snackbar"
+          severity={message?.severity}
+          onClose={handleClose}
+        >
           {message?.text}
         </Alert>
       </Snackbar>
