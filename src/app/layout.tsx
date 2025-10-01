@@ -8,6 +8,9 @@ import { Box } from '@mui/material';
 export const metadata: Metadata = {
   title: 'Quiz App',
   description: 'Enjoy!',
+  icons: {
+    icon: [{ url: '/favico' }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
